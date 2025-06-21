@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: camlin_db
+    environment:
+      POSTGRES_USER: camlinuser
+      POSTGRES_PASSWORD: camlinpass
+      POSTGRES_DB: camlindb
+    ports:
+      - "5432:5432"   # Expose PostgreSQL on the default port
+    volumes:
+      - camlin_data:/var/lib/postgresql/data  # Persist data across restarts
+    networks:
+      - camlin-dev-network
+
+  camlin_app:
+    image: camlin_app
+    container_name: camlin_app
+    environment:
+      DB_USER: camlinuser
+      DB_PASS: camlinpass
+      DB_NAME: camlindb
+      DB_HOST: postgres
+      DB_PORT: 5432
+    ports:
+      - "8000:8000"
+#    command: "sleep 10000"
+    volumes:
+      - /home/borislav/Desktop/camlin:/camlin
+    networks:
+      - camlin-dev-network
+
+volumes:
+  camlin_data:
+
+networks:
+  camlin-dev-network:
+    driver: bridge
+
+

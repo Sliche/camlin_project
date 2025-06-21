@@ -1,0 +1,2 @@
+STATUS_ACTIVE = "Active"
+STATUS_DELETED = "Deleted"

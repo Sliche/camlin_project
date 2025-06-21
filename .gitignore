@@ -1,0 +1,60 @@
+# Python Bytecode
+*.py[cod]
+__pycache__/
+*.so
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# FastAPI-related files
+*.log
+*.sqlite3
+instance/
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Unit test / pytest cache files
+.cache/
+pytest_cache/
+
+# JetBrains IDE (e.g., PyCharm, WebStorm)
+.idea/
+
+# macOS system files
+.DS_Store
+
+# VSCode configuration
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Distribution / Packaging
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+commands.json
+alembic/versions
+
+# PEP 582 support (used by some Python environments)
+​⬤
+
+/.env
+.env
+.env.server
+.env.local
