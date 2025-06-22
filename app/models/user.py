@@ -22,3 +22,4 @@ class User(Base, TimestampMixin):
 
     status = Column(String(32), nullable=True, default=STATUS_ACTIVE)
 
+    wallets = relationship("Wallet", back_populates="owner", cascade="all, delete-orphan")

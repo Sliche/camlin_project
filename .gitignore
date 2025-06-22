@@ -54,6 +54,8 @@ alembic/versions
 # PEP 582 support (used by some Python environments)
 ​⬤
 
+notes
+
 /.env
 .env
 .env.server

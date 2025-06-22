@@ -1,0 +1,4 @@
+1. All crud routes are not defined as async, as I am using default sqlalchemy version and not the asyncio one. The needs
+of the project dont requite async sqlalchemy and I think of it as out of the scope.
+2. Routes which fetch things from bank API however are using async routes since it makes sence to use it there.
+3.
