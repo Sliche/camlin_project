@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String, TIMESTAMP, func, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 
-from app.models.base import TimestampMixin
 from app.db import Base
+from app.models.base_model import TimestampMixin
 from app.models.constants import STATUS_ACTIVE
+from app.models.wallet_model import Wallet
 
 
 class User(Base, TimestampMixin):
@@ -12,7 +13,7 @@ class User(Base, TimestampMixin):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    email = Column(String(120), unique=True, nullable=False)
+    email = Column(String(128), unique=True, nullable=False)
 
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)

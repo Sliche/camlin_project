@@ -18,7 +18,7 @@ class NBPClient:
             try:
                 response = await self.client.get(url)
                 response.raise_for_status()
-                return response.json()
+                return response.json()["rates"][0]["mid"]
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 404:
                     continue  # Try next table

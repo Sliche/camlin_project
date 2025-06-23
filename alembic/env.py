@@ -7,7 +7,10 @@ load_dotenv(override=True)
 
 from app.db import Base
 
-from app.models.user import User
+from app.models.user_model import User
+from app.models.currency_model import Currency
+from app.models.wallet_model import Wallet
+from app.models.wallet_currency_model import WalletCurrency
 
 target_metadata = Base.metadata
 config = context.config

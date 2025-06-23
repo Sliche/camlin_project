@@ -16,7 +16,6 @@ class BaseService(object):
 
         model = self.model()
         for field_name, value in create_schema.dict(exclude_unset=True).items():
-            print(f"{field_name}: {value}")
             setattr(model, field_name, value)
 
         self.db.add(model)
@@ -53,10 +52,10 @@ class BaseService(object):
 
         try:
             for field_name, value in update_schema.dict(exclude_unset=True).items():
-                print(f"{field_name}: {value}")
                 setattr(existing_entity, field_name, value)
             self.db.commit()
             self.db.refresh(existing_entity)
         except Exception as e:
             self.db.rollback()
             raise e
+        return existing_entity

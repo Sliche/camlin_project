@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, TIMESTAMP, func, ForeignKey, JSON
+from sqlalchemy import Column, TIMESTAMP, func
 
 
 Base = declarative_base()

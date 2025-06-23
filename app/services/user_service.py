@@ -1,18 +1,16 @@
 from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from app.db import get_db
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/token")
-
-from app.models.user import User as UserModel
+from app.models.user_model import User as UserModel
 from app.wrappers.jwt import JWTManager
 from app.schemas.user_schemas import UserCreate
 from app.wrappers.hashing import Hash
 from app.services.base_service import BaseService
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/token")
 jwt_service = JWTManager()
 hash_service = Hash()
 
@@ -28,6 +26,8 @@ class UserService(BaseService):
         user_in.password = hashed_pw
         try:
             user = super().create(user_in)
+            print("pringint user")
+            print(user)
             return user
         # here you can handle all possible errors during creation
         except IntegrityError:
