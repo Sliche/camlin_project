@@ -6,18 +6,7 @@ from typing import Optional
 from app.schemas.base_schema import BaseSchema
 
 
-class UserCreate(BaseSchema):
-    username: str = Field(
-        ...,
-        min_length=3,
-        max_length=20,
-        description="Username must be 3–20 characters long, only lowercase letters"
-    )
-    password: str = Field(
-        ...,
-        min_length=8,
-        description="Password must be at least 8 characters long"
-    )
+class BaseUserInput(BaseSchema):
     email: EmailStr = Field(
         ...,
         description="Valid email address"
@@ -32,6 +21,12 @@ class UserCreate(BaseSchema):
         max_length=30,
         description="Optional last name (max 30 characters)"
     )
+    username: str = Field(
+        ...,
+        min_length=3,
+        max_length=20,
+        description="Username must be 3–20 characters long, only lowercase letters"
+    )
 
     @field_validator("username")
     @classmethod
@@ -41,8 +36,16 @@ class UserCreate(BaseSchema):
         return value
 
 
-class UpdateUserSchema(UserCreate):
+class UpdateUserSchema(BaseUserInput):
     pass
+
+
+class UserCreate(BaseUserInput):
+    password: str = Field(
+        ...,
+        min_length=8,
+        description="Password must be at least 8 characters long"
+    )
 
 
 class UserResponse(BaseSchema):

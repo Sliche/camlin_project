@@ -3,8 +3,8 @@
 # Example commands
 echo "Starting application..."
 
-#alembic revision --autogenerate -m "Performing auto migration"
-#alembic upgrade head
+alembic revision --autogenerate -m "Performing auto migration"
+alembic upgrade head
 
 export PYTHONPATH="/camlin:$PYTHONPATH"
 

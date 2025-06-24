@@ -43,43 +43,24 @@ def add_currency_to_wallet(
         )
 
     wallet_id = wallet_service.get_default_wallet(current_user.id).id if data.wallet_id == 0 else data.wallet_id
+    print(wallet_id)
+    if wallet_service.check_if_wallet_belongs_to_user(current_user.id, wallet_id):
+        if "add" in request.url.path:
+            wallet_service.add_currency(wallet_id, data.currency_code, data.amount)
+        else:
+            wallet_service.subtract_currency(wallet_id, data.currency_code, data.amount)
 
-    if "add" in request.url.path:
-        wallet_service.add_currency(wallet_id, data.currency_code, data.amount)
+        return JSONResponse(
+            status_code=200,
+            content={"message": "Operation Successful"}
+        )
     else:
-        wallet_service.subtract_currency(wallet_id, data.currency_code, data.amount)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Wallet does not belong to you."
+        )
 
-    return JSONResponse(
-        status_code=200,
-        content={"message": "User deleted"}
-    )
-
-class Currency:
-    state: str
-    code: str
-
-    def dict(self, *args, **kwargs):
-        return {
-            "code": self.code,
-            "state": self.state
-        }
-
-
-@router.get("/tester")
-async def create_currencies(db: Session = Depends(get_db)):
-    table_data = await bank_api().get_exchange_table("A")
-    # print(table_data)
-    print(type(table_data))
-    for item in table_data[0]["rates"]:
-        print(item)
-        schema = Currency()
-        schema.code = item["code"]
-        schema.state = item["currency"]
-        schema.__dict__ = {
-            "code": item["code"],
-            "state": item["currency"]
-        }
-        print(schema)
-        currency_service(db).create(schema)
-
-    return "Hello world from wallets"
+# @router.get("/testera")
+# async def get_data_tara(db: Session = Depends(get_db), current_user: UserResponse = Depends(users_service.get_current_user)):
+#     currency_service
+#     return currency_amounts

@@ -14,12 +14,14 @@ it is only the default user with credentials:
 username: camlin12
 password: camlin12
 ```
-It will also fetch all currencies supported by NBP api and only those currencies will be able
+It will also fetch all currencies supported by NBP api and only those currencies will be permitted
 for API operations.
 
+Once the 
+
 ### NOTES
-1. 
-2. 
+1. Storing db and other credentials and keys like this in env.sample publicly on git is not how its done on prod envs but for this use case it works because I wanted everything to work with minimal setup
+2. I am using Fastapi's OAuth2PasswordBearer for logging in, fields client_id and client_secret can be ignored while logging in.
 3. User managing routes are written to be managed by end-user. Not from admin perspective. This means
 that each protected route concerning users will perform operations on the currently logged in user.
-2. 
+4. 

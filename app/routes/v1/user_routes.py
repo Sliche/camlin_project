@@ -43,6 +43,7 @@ def delete_user(db: Session = Depends(get_db),
         content={"message": "User deleted"}
     )
 
+
 @router.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)) -> Token:
     user = users_service.authenticate_user(db, form_data.username, form_data.password)

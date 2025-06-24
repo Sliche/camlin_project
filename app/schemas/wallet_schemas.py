@@ -14,5 +14,6 @@ class WalletCurrency(BaseModel):
 
     wallet_id: Optional[int] = Field(
         default=0,
+        ge=0,
         description="Leave 0 to add to default wallet, or replace with exact wallet id you wish to add the funds to",
     )

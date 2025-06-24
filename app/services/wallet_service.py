@@ -44,7 +44,6 @@ class WalletService(BaseService):
             wallets_data.append(data)
         return wallets_data
 
-
     def create_default_wallet(self, user_id):
         new_wallet = self.model()
         new_wallet.user_id = user_id
@@ -67,6 +66,10 @@ class WalletService(BaseService):
 
         return default_wallet
 
+    def check_if_wallet_belongs_to_user(self, user_id, wallet_id):
+        wallet = self.get_by_id(wallet_id)
+        return True if (wallet and wallet.owner.id == user_id) else False
+
     def add_currency(self, wallet_id, currency_code, amount):
 
         currency = self.db.query(Currency).filter(Currency.code == currency_code).first()
@@ -81,8 +84,11 @@ class WalletService(BaseService):
             wallet_currency.amount = amount
 
         self.db.add(wallet_currency)
-        self.db.commit()
-
+        try:
+            self.db.commit()
+        except Exception as e:
+            self.db.rollback()
+            
     def subtract_currency(self, wallet_id, currency_code, amount):
         currency = self.db.query(Currency).filter(Currency.code == currency_code).first()
         wallet_currency = self.db.query(WalletCurrency).filter(WalletCurrency.wallet_id == wallet_id,
