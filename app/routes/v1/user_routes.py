@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
-from fastapi import Depends, APIRouter, Response
+from fastapi import APIRouter, HTTPException
+from fastapi import Depends, status
+
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 from app.wrappers.jwt import JWTManager
@@ -48,10 +50,14 @@ def delete_user(db: Session = Depends(get_db),
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)) -> Token:
     user = users_service.authenticate_user(db, form_data.username, form_data.password)
 
-    access_token = jwt_service.create_token({
-        "sub": str(user.id)
-    })
+    if user:
+        access_token = jwt_service.create_token({
+            "sub": str(user.id)
+        })
 
-    return Token(access_token=access_token, token_type="bearer")
-
-
+        return Token(access_token=access_token, token_type="bearer")
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Something went wrong."
+        )

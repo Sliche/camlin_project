@@ -4,16 +4,21 @@ Once you clone the application, do
 cp .env.sample .env
 docker-compose up -d
 ```
-The docker image used is the one on my docker repository and it is public.
 The application should work out of the box. It is configured by default to work on port 8000.
 So visit http://localhost:8000/docs.
 
-On first run it will do the database migration and create necessary records. As for this application
-it is only the default user with credentials:
+Authorize yourself with following credentials on upper right corner with "Authorize" button
+client_id and client_secret are to be ignored
+
 ```
 username: camlin12
 password: camlin12
 ```
+
+The docker image used is the one on my docker repository and it is public.
+On first run it will do the database migration and create necessary records. As for this application
+it is only the default user with credentials:
+
 It will also fetch all currencies supported by NBP api and only those currencies will be permitted
 for API operations.
 
