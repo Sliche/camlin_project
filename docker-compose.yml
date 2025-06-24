@@ -17,6 +17,7 @@ services:
 
   camlin_app:
 #    image: sliche/camlin_app:3
+    image: sliche/camlin_app:3
     container_name: camlin_app
     environment:
       DB_USER: camlinuser
