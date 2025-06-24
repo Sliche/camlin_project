@@ -16,7 +16,7 @@ services:
       - camlin-dev-network
 
   camlin_app:
-    image: camlin_app:2
+    image: sliche/camlin_app
     container_name: camlin_app
     environment:
       DB_USER: camlinuser
