@@ -88,7 +88,7 @@ class WalletService(BaseService):
             self.db.commit()
         except Exception as e:
             self.db.rollback()
-            
+
     def subtract_currency(self, wallet_id, currency_code, amount):
         currency = self.db.query(Currency).filter(Currency.code == currency_code).first()
         wallet_currency = self.db.query(WalletCurrency).filter(WalletCurrency.wallet_id == wallet_id,

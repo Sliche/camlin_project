@@ -43,7 +43,6 @@ def add_currency_to_wallet(
         )
 
     wallet_id = wallet_service.get_default_wallet(current_user.id).id if data.wallet_id == 0 else data.wallet_id
-    print(wallet_id)
     if wallet_service.check_if_wallet_belongs_to_user(current_user.id, wallet_id):
         if "add" in request.url.path:
             wallet_service.add_currency(wallet_id, data.currency_code, data.amount)
@@ -59,8 +58,3 @@ def add_currency_to_wallet(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Wallet does not belong to you."
         )
-
-# @router.get("/testera")
-# async def get_data_tara(db: Session = Depends(get_db), current_user: UserResponse = Depends(users_service.get_current_user)):
-#     currency_service
-#     return currency_amounts
