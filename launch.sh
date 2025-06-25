@@ -2,6 +2,8 @@
 
 # Example commands
 echo "Starting application..."
+echo "Making sure postgres is initialized"
+sleep 10
 
 alembic revision --autogenerate -m "Performing auto migration"
 alembic upgrade head
