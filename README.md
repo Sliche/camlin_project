@@ -1,9 +1,9 @@
 # Application Startup
 Once you clone the application, do
 ```
-cp .env.sample .env
 docker-compose up -d
 ```
+Some basic .env is built into the docker image. If you want to change it and build your own image, make sure to copp .env.sample to .env as it is on gitignore
 The application should work out of the box. It is configured by default to work on port 8000.
 So visit http://localhost:8000/docs.
 
@@ -17,7 +17,7 @@ password: camlin12
 
 The docker image used is the one on my docker repository and it is public.
 On first run it will do the database migration and create necessary records. As for this application
-it is only the default user with credentials:
+it is only the default user with credentials and his default wallet:
 
 It will also fetch all currencies supported by NBP api and only those currencies will be permitted
 for API operations.
@@ -29,4 +29,5 @@ Once the
 2. I am using Fastapi's OAuth2PasswordBearer for logging in, fields client_id and client_secret can be ignored while logging in.
 3. User managing routes are written to be managed by end-user. Not from admin perspective. This means
 that each protected route concerning users will perform operations on the currently logged in user.
-4. 
+4. Supported currencies are those which exist in tables A and B on the NBP api
+5. 

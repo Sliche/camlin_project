@@ -1,9 +1,11 @@
 import httpx
-import json
+from cachetools import TTLCache
 import os
 from typing import Literal, Optional
 from dotenv import load_dotenv
 load_dotenv()
+
+cache = TTLCache(maxsize=200, ttl=5)
 
 
 class NBPClient:
@@ -13,12 +15,18 @@ class NBPClient:
         self.client = httpx.AsyncClient(base_url=self.BASE_URL, headers={"Accept": "application/json"})
 
     async def get_current_rate(self, currency: str) -> Optional[dict]:
+        currency = currency.upper()
+        if currency in cache:
+            return cache[currency]
+
         for table in ["A", "B"]:
             url = f"/exchangerates/rates/{table}/{currency.upper()}/"
             try:
                 response = await self.client.get(url)
                 response.raise_for_status()
-                return response.json()["rates"][0]["mid"]
+                rate = response.json()["rates"][0]["mid"]
+                cache[currency] = rate
+                return rate
             except httpx.HTTPStatusError as e:
                 if e.response.status_code == 404:
                     continue  # Try next table

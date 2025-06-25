@@ -16,8 +16,7 @@ services:
       - camlin-dev-network
 
   camlin_app:
-#    image: sliche/camlin_app:3
-    image: sliche/camlin_app:4
+    image: sliche/camlin_app:5
     container_name: camlin_app
     environment:
       DB_USER: camlinuser
@@ -28,8 +27,8 @@ services:
     ports:
       - "8000:8000"
 #    command: "sleep 10000"
-#    volumes:
-#      - /home/borislav/Desktop/camlin:/camlin
+    volumes:
+      - /home/borislav/Desktop/camlin:/camlin
     networks:
       - camlin-dev-network
 
