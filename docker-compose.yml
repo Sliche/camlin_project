@@ -11,12 +11,12 @@ services:
     ports:
       - "5432:5432"   # Expose PostgreSQL on the default port
     volumes:
-      - camlin_dat3:/var/lib/postgresql/data  # Persist data across restarts
+      - camlin_data4:/var/lib/postgresql/data  # Persist data across restarts
     networks:
       - camlin-dev-network
 
   camlin_app:
-    image: sliche/camlin_app:7
+    image: sliche/camlin_app:8
     depends_on:
       - postgres
     container_name: camlin_app
@@ -35,7 +35,7 @@ services:
       - camlin-dev-network
 
 volumes:
-  camlin_dat3:
+  camlin_data4:
 
 networks:
   camlin-dev-network:

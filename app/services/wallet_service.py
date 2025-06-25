@@ -8,9 +8,6 @@ from app.models.currency_model import Currency
 from app.services.base_service import BaseService
 from app.wrappers.nbp_api import NBPClient as bank_api
 
-from dotenv import load_dotenv
-load_dotenv()
-
 
 class WalletService(BaseService):
 

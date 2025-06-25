@@ -42,7 +42,10 @@ def add_currency_to_wallet(
             detail=f"Currency '{data.currency_code}' is not supported."
         )
 
-    wallet_id = wallet_service.get_default_wallet(current_user.id).id if data.wallet_id == 0 else data.wallet_id
+    wallet_id = wallet_service.get_default_wallet(current_user.id).id
+    #functionality to support adding currencies to different (multiple) wallets
+    # wallet_id = wallet_service.get_default_wallet(current_user.id).id if data.wallet_id == 0 else data.wallet_id
+
     if wallet_service.check_if_wallet_belongs_to_user(current_user.id, wallet_id):
         if "add" in request.url.path:
             wallet_service.add_currency(wallet_id, data.currency_code, data.amount)

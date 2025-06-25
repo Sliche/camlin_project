@@ -1,9 +1,9 @@
 from app.schemas.base_schema import BaseSchema
-from pydantic import BaseModel, EmailStr, field_validator, Field
+from pydantic import Field
 from typing import Optional
 
 
-class WalletCurrency(BaseModel):
+class WalletCurrency(BaseSchema):
     currency_code: str
 
     amount: float = Field(
@@ -12,8 +12,8 @@ class WalletCurrency(BaseModel):
         le=1_000_000,
     )
 
-    wallet_id: Optional[int] = Field(
-        default=0,
-        ge=0,
-        description="Leave 0 to add to default wallet, or replace with exact wallet id you wish to add the funds to",
-    )
+    # wallet_id: Optional[int] = Field(
+    #     default=0,
+    #     ge=0,
+    #     description="Leave 0 to add to default wallet, or replace with exact wallet id you wish to add the funds to",
+    # )

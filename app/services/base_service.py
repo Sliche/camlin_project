@@ -1,7 +1,4 @@
-from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from app.db import get_db
 
 
 class BaseService(object):

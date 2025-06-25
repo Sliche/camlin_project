@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from sqlalchemy.orm import Session
-
 from app.db import get_db
 from app.services.currency_service import CurrencyService as currency_service
 from app.services.user_service import UserService as user_service
-from app.services.wallet_service import WalletService as wallet_service
 from app.routes.v1 import wallet_routes
 from app.routes.v1 import user_routes
+
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = FastAPI()
 
